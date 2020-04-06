@@ -3,8 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>continuum</groupId>
-	<artifactId>OneFrame</artifactId>
+	<groupId>OneFrame</groupId>
+	<artifactId>SampleProject</artifactId>
 	<version>0.0.1</version>
 	<name>OneFrameForAll</name>
 	<url>http://maven.apache.org</url>
@@ -221,14 +221,6 @@
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
-					<!-- attached to Maven test phase -->
-					<execution>
-						<id>report-aggregate</id>
-						<phase>package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -236,7 +228,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
 				<configuration>
-					<!-- <argLine>-Xmx2048m</argLine> -->
 					<suiteXmlFiles>
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
@@ -326,55 +317,6 @@
 						<goals>
 							<goal>test-jar</goal>
 						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.0.1</version>
-				<executions>
-					<execution>
-						<id>unpack-config</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.continuum</groupId>
-									<artifactId>cucumber</artifactId>
-									<version>0.0.1</version>
-									<type>jar</type>
-								</artifactItem>
-							</artifactItems>
-							<includes>CommonConfig.properties</includes>
-							<outputDirectory>${project.build.directory}/resources/config</outputDirectory>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-						</configuration>
-					</execution>
-					<execution>
-						<id>unpack-webdriver</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.continuum</groupId>
-									<artifactId>cucumber</artifactId>
-									<version>0.0.1</version>
-									<type>jar</type>
-								</artifactItem>
-							</artifactItems>
-							<includes>*river*.exe,*s*.jar</includes>
-							<outputDirectory>lib</outputDirectory>
-							<overWriteReleases>true</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
