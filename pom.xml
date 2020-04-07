@@ -351,7 +351,6 @@
 					<targetJdk>${jre.level}</targetJdk>
 					<printFailingErrors>true</printFailingErrors>
 					<failOnViolation>true</failOnViolation>
-					<excludeFromFailureFile>code-compliances\exclude-ip-hardcode-pmd.properties</excludeFromFailureFile>
 					<linkXRef>false</linkXRef>
 				</configuration>
 				<executions>
@@ -374,7 +373,6 @@
 					<xmlOutput>true</xmlOutput>
 					<xmlOutputDirectory>target/site</xmlOutputDirectory>
 					<failOnError>true</failOnError>
-					<excludeFilterFile>code-compliances\findbugs_exclude_filter.xml</excludeFilterFile>
 				</configuration>
 				<executions>
 					<execution>

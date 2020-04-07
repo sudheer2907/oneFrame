@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.oneframe.cucumber.projectone.beans.FilesBeans;
 
 import continuum.cucumber.Utilities;
 

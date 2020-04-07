@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.projectone.beans;
+package com.oneframe.cucumber.oneframeutils;
 
 /**
  * FilesBeans class is POJO which allows you to set and get File fields to be

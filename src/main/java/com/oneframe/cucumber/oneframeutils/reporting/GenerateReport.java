@@ -1,4 +1,4 @@
-package oneframe.cucumber.reporting;
+package com.oneframe.cucumber.oneframeutils.reporting;
 
 import java.io.File;
 import java.util.ArrayList;

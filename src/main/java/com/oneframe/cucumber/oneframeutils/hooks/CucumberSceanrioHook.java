@@ -1,4 +1,4 @@
-package oneframe.cucumber.hooks;
+package com.oneframe.cucumber.oneframeutils.hooks;
 
 import java.io.IOException;
 
