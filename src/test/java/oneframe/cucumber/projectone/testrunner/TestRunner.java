@@ -8,17 +8,18 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.oneframe.cucumber.oneframeutils.reporting.GenerateReport;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
-import oneframe.cucumber.reporting.GenerateReport;
 
 @RunWith(Cucumber.class)
 
 @CucumberOptions(monochrome = true, features = "src//test//resources//features//projectOne", glue = "oneframe.cucumber.projectone.stepdefinitions", plugin = {
         "pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm", "html:target/test-report/cucumber",
-        "json:target/test-report/cucumber.json" }, tags = { "@TestGetMethod" })
+        "json:target/test-report/cucumber.json" }, tags = { "@test" })
 public class TestRunner {
     private TestNGCucumberRunner testNGCucumberRunner;
     private static String scenarioName = null;

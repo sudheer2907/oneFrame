@@ -5,6 +5,7 @@ import org.json.JSONObject;
 public class ResponseBean {
     private static ResponseBean responseBeans;
     private JSONObject response;
+    private int statusCode;
 
     /**
      * Private no argument constructor for FilesBeans restricting instance
@@ -46,5 +47,30 @@ public class ResponseBean {
             initFileBean();
         }
         return responseBeans.response;
+    }
+
+    /**
+     * Set status code.
+     *
+     * @param statusCode
+     *            - status code of response.
+     */
+    public static void setStatusCode(int statusCode) {
+        if (responseBeans == null) {
+            initFileBean();
+        }
+        responseBeans.statusCode = statusCode;
+    }
+
+    /**
+     * Get status code of response.
+     *
+     * @return - Status code of response.
+     */
+    public static int getStatusCode() {
+        if (responseBeans == null) {
+            initFileBean();
+        }
+        return responseBeans.statusCode;
     }
 }

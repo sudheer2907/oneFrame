@@ -2,8 +2,6 @@ package com.oneframe.cucumber.oneframeutils.hooks;
 
 import java.io.IOException;
 
-import com.oneframe.cucumber.oneframeutils.FileUtil;
-
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -18,11 +16,9 @@ public class CucumberSceanrioHook {
 
     @Before
     public void beforeSceanrio(Scenario scenario) throws IOException {
-        FileUtil.writeToDataFile("******* Starting " + scenario.getName() + " Logs *******");
     }
 
     @After
     public void afterSceanrio(Scenario scenario) throws IOException {
-        FileUtil.writeToDataFile("******* Ending " + scenario.getName() + " Logs *******");
     }
 }

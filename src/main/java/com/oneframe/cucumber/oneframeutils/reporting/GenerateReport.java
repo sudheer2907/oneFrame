@@ -5,11 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.mkolisnyk.cucumber.reporting.CucumberResultsOverview;
+import com.oneframe.cucumber.oneframeutils.LogPrinter;
 
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
 
 public class GenerateReport {
+
+    /**
+     * generate report post execution.
+     *
+     * @param projectName
+     *            - name of the project for which report will be generated.
+     * @param reportFolderName
+     *            - folder name in which all the reporting files will exist.
+     * @author sudheer.singh
+     */
     public static void generateReport(String projectName, String reportFolderName) {
         CucumberResultsOverview results = new CucumberResultsOverview();
         results.setOutputDirectory(reportFolderName);
@@ -20,11 +31,20 @@ public class GenerateReport {
             results.executeFeaturesOverviewReport();
             generateCucumberReport(projectName, reportFolderName);
         } catch (Exception var4) {
-            System.out.println("Not able to create cucumber reports" + var4.getMessage());
+            LogPrinter.printLog("Not able to create cucumber reports" + var4.getMessage());
         }
 
     }
 
+    /**
+     * Generate cucumber report.
+     *
+     * @param projectName
+     *            - name of the project for which report will be generated.
+     * @param reportFolderName
+     *            - folder name in which all the reporting files will exist.
+     * @author sudheer.singh
+     */
     public static void generateCucumberReport(String projectName, String reportFolderName) {
         File reportOutputDirectory = new File(reportFolderName);
         List<String> jsonFiles = new ArrayList();

@@ -5,14 +5,13 @@ import static io.restassured.RestAssured.given;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.oneframe.cucumber.oneframeutils.Utilities;
 import com.oneframe.cucumber.projectone.beans.ResponseBean;
 import com.oneframe.cucumber.projectone.constants.JSONConstants;
 
 import io.restassured.response.Response;
 
 public class GetHelper {
-    private static final String LIST_USER_STRING = "https://reqres.in/api/users";
-    private static final String SINGLE_USER_STRING = "https://reqres.in/api/users/2";
     private static Response response = null;
     private static String errorMessage = null;
 
@@ -25,7 +24,7 @@ public class GetHelper {
      * @author sudheer.singh
      */
     public static JSONObject getListUsers() throws JSONException {
-        response = given().when().get(LIST_USER_STRING);
+        response = given().when().get(Utilities.getEnvironmentProperties("GetListOfUsers"));
         if (response.statusCode() != JSONConstants.OK_STATUS_CODE) {
             errorMessage = response.then().extract().asString();
             throw new JSONException("Service to get access token is not working " + errorMessage);
@@ -43,7 +42,7 @@ public class GetHelper {
      * @author sudheer.singh
      */
     public static JSONObject getSingleUser() throws JSONException {
-        response = given().when().get(SINGLE_USER_STRING);
+        response = given().when().get(Utilities.getEnvironmentProperties("GetDetailsOfSingleUser"));
         if (response.statusCode() != JSONConstants.OK_STATUS_CODE) {
             errorMessage = response.then().extract().asString();
             throw new JSONException("Service to get access token is not working " + errorMessage);

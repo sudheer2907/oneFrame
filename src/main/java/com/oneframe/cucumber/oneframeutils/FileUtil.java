@@ -9,54 +9,19 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.FileWriterWithEncoding;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import continuum.cucumber.Utilities;
 
 public class FileUtil {
     public static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
     private static String sourceLocation;
     private static String targetLocation;
-
-    private static final String LOG_DATA_FILE_NAME = "log_data.txt";
-    private static final String PROJECT_BASE_DIR = System.getProperty("user.dir");
-    private static final Path GENERATED_DATA_FILE = Paths.get(PROJECT_BASE_DIR, LOG_DATA_FILE_NAME);
-
-    private static final String DATE_FORMAT = "MM/dd/yyyy HH:mm:ss aa";
-
     private static PrintWriter printWriter;
-    private static FileWriterWithEncoding fileWriter;
-
-    private static final boolean WRITE_TO_LOG_FILE = Boolean
-            .parseBoolean(Utilities.getMavenProperties("writeToScenarioLog"));
-
-    static {
-        if (!Files.exists(GENERATED_DATA_FILE)) {
-            try {
-                Files.createFile(GENERATED_DATA_FILE);
-            } catch (IOException e) {
-                LogPrinter.printLog("Unable to Create File with path : " + GENERATED_DATA_FILE.toString() + " Error : "
-                        + e.getMessage());
-            }
-        }
-        try {
-            fileWriter = new FileWriterWithEncoding(GENERATED_DATA_FILE.toFile(), StandardCharsets.UTF_8, true);
-        } catch (IOException e) {
-            LogPrinter.printLog("Error Initializing FileWriter : " + e.getMessage());
-        }
-
-    }
 
     /**
      * Load files as string.
@@ -94,14 +59,6 @@ public class FileUtil {
         }
 
         return result;
-    }
-
-    /**
-     * get resource by specified path. if resource was not found, assume path
-     * variable is absolute already.
-     */
-    public static String getAbsPath(String path) {
-        return FileUtil.class.getResource(path) != null ? FileUtil.class.getResource(path).getPath() : path;
     }
 
     /**
@@ -153,9 +110,9 @@ public class FileUtil {
      *
      * @param fileName
      *            - Name of the files which has to be copied.
-     * @author sudheer.singh
      * @throws IOException
      *             if an IO error occurs during copying.
+     * @author sudheer.singh
      */
     public static void copyFilesFromSourceToTarget(String fileName) throws IOException {
         if (FilesBeans.getSourceFileLocation() != null) {
@@ -181,26 +138,24 @@ public class FileUtil {
      * @param fileName
      *            - json file name.
      * @return JsonObject - content in the form of json.
+     * @throws JSONException
+     *             - if in case of JSON exception.
      * @author sudheer.singh
      */
-    public static JsonObject readJsonFile(String fileName) throws IOException {
-        JsonParser parser = new JsonParser();
-        InputStream inputStream = FileUtil.class.getResourceAsStream(fileName);
-        String jsonTxt = IOUtils.toString(inputStream, Charset.defaultCharset());
-        JsonElement jsonElement = parser.parse(jsonTxt);
-        return jsonElement.getAsJsonObject();
+    public static JSONObject readJSONFile(String fileName) throws IOException, JSONException {
+        InputStream inputStream = FileUtil.class.getResourceAsStream("/payloads/" + fileName);
+        return new JSONObject(IOUtils.toString(inputStream, Charset.defaultCharset()));
     }
 
     /**
-     * Read xml files should be available in continuum/cucumber/utils/testutil
-     * folder.
+     * Read xml from resource directory.
      *
      * @param fileName
-     *            - file name.
+     *            - name of the file.
      * @return - file content
-     * @author poras.suryawanshi
      * @throws IOException
-     *             - If file is not present in the Classpath.
+     *             - if in case of IO exception
+     * @author sudheer.singh
      */
     public static String readXmlFile(String fileName) throws IOException {
         String fileContent = null;
@@ -212,30 +167,6 @@ public class FileUtil {
             throw ioe;
         }
         return fileContent;
-    }
-
-    /**
-     * Prints an Object and then terminates the line inside the file created at
-     * Projects Base Directory.
-     *
-     * @param toWrite
-     *            the <code>Object</code> value to be written on file.
-     */
-    public static void writeToDataFile(Object toWrite) {
-        if (!WRITE_TO_LOG_FILE) {
-            return;
-        }
-        final SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
-        try {
-            if (printWriter == null) {
-                printWriter = new PrintWriter(fileWriter, true);
-            }
-            final String currentDateTime = dateFormatter.format(new Date());
-            printWriter.println("Writing at " + currentDateTime + " Log : " + toWrite.toString());
-        } catch (Exception ioe) {
-            LogPrinter.printLog("Unable to write to File due to some error:" + ioe.getMessage());
-        }
-
     }
 
     /**

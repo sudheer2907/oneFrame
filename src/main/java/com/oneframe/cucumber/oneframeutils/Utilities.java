@@ -1,24 +1,41 @@
 package com.oneframe.cucumber.oneframeutils;
 
-public class Utilities {
-    private static String strEnvironment = null;
+import java.util.ResourceBundle;
 
-    /**
-     * Get Environment name.
-     *
-     * @return - environment name.
-     */
-    public static String getStrEnvironment() {
-        return strEnvironment;
+public class Utilities {
+    private static final ResourceBundle rb1;
+    private static ResourceBundle rb2;
+
+    static {
+        rb1 = ResourceBundle.getBundle("config");
     }
 
     /**
-     * Set environment name.
+     * get config properties.
      *
-     * @param strEnvironment
-     *            - Environment name.
+     * @param keyString
+     *            - key string whose value tp be fetched.
+     * @return - key value
+     * @author sudheer.singh
      */
-    public static void setStrEnvironment(String strEnvironment) {
-        Utilities.strEnvironment = strEnvironment;
+    public static String getConfigProperties(String keyString) {
+        return rb1.getString(keyString);
+    }
+
+    /**
+     * get environment config properties.
+     *
+     * @param keyString
+     *            - key string whose value tp be fetched.
+     * @return - key value
+     * @author sudheer.singh
+     */
+    public static String getEnvironmentProperties(String keyString) {
+        if (rb2 == null) {
+            String environmentStr = getConfigProperties("Environment");
+            System.out.println("environmentStr is " + environmentStr);
+            rb2 = ResourceBundle.getBundle(environmentStr + "config");
+        }
+        return rb2.getString(keyString);
     }
 }
