@@ -2,7 +2,6 @@ package oneframe.cucumber.projectone.testrunner;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -19,11 +18,10 @@ import cucumber.api.testng.TestNGCucumberRunner;
 
 @CucumberOptions(monochrome = true, features = "src//test//resources//features//projectOne", glue = "oneframe.cucumber.projectone.stepdefinitions", plugin = {
         "pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm", "html:target/test-report/cucumber",
-        "json:target/test-report/cucumber.json" }, tags = { "@test" })
+        "json:target/test-report/cucumber.json" }, tags = { "@UITestsample" })
 public class TestRunner {
     private TestNGCucumberRunner testNGCucumberRunner;
     private static String scenarioName = null;
-    static RemoteWebDriver driver = null;
 
     /**
      * setUpClass.
