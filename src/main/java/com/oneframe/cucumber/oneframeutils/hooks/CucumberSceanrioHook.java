@@ -2,7 +2,8 @@ package com.oneframe.cucumber.oneframeutils.hooks;
 
 import java.io.IOException;
 
-import com.oneframe.cucumber.oneframeutils.TestFactory;
+import com.oneframe.cucumber.oneframeutils.LogPrinter;
+import com.oneframe.cucumber.oneframeutils.WebDriverFactory;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -14,15 +15,15 @@ import cucumber.api.java.Before;
  * scenarios execution.
  *
  */
-public class CucumberSceanrioHook extends TestFactory {
+public class CucumberSceanrioHook {
 
     @Before
     public void beforeSceanrio(Scenario scenario) throws IOException {
+        LogPrinter.printLog("Execution Started, Executing:" + scenario.getName());
     }
 
     @After
     public void afterSceanrio(Scenario scenario) throws IOException {
-        TestFactory.getDriver().quit();
+        WebDriverFactory.closeWindow();
     }
-
 }

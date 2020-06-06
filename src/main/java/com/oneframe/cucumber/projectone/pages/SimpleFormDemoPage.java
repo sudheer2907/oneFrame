@@ -5,12 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.oneframe.cucumber.oneframeutils.TestFactory;
+import com.oneframe.cucumber.oneframeutils.WebDriverFactory;
 
 public class SimpleFormDemoPage {
 
     public SimpleFormDemoPage() {
-        PageFactory.initElements(TestFactory.getDriver(), this);
+        PageFactory.initElements(WebDriverFactory.getDriver(), this);
     }
 
     @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Input Forms')]")
@@ -38,7 +38,7 @@ public class SimpleFormDemoPage {
     private WebElement subTabJQuerySelectDropdown;
 
     public void clickonTab(String tabString) {
-        TestFactory.clickWebElement(tabInputForms);
+        WebDriverFactory.clickWebElement(tabInputForms);
     }
 
     /**
@@ -51,25 +51,25 @@ public class SimpleFormDemoPage {
     public void clickOnSubtab(String subTabString) {
         switch (subTabString) {
         case "Simple Form Demo":
-            TestFactory.clickWebElement(subTabSimpleFormDemo);
+            WebDriverFactory.clickWebElement(subTabSimpleFormDemo);
             break;
         case "Checkbox Demo":
-            TestFactory.clickWebElement(subTabCheckBoxDemo);
+            WebDriverFactory.clickWebElement(subTabCheckBoxDemo);
             break;
         case "Radio Buttons Demo":
-            TestFactory.clickWebElement(subTabRadioButtonDemo);
+            WebDriverFactory.clickWebElement(subTabRadioButtonDemo);
             break;
         case "Select Dropdown List":
-            TestFactory.clickWebElement(subTabSelectDropDownList);
+            WebDriverFactory.clickWebElement(subTabSelectDropDownList);
             break;
         case "Input Form Submit":
-            TestFactory.clickWebElement(subTabInputFormSubmit);
+            WebDriverFactory.clickWebElement(subTabInputFormSubmit);
             break;
         case "Ajax Form Submit":
-            TestFactory.clickWebElement(subTabAjaxFormSubmit);
+            WebDriverFactory.clickWebElement(subTabAjaxFormSubmit);
             break;
         case "JQuery Select dropdown":
-            TestFactory.clickWebElement(subTabJQuerySelectDropdown);
+            WebDriverFactory.clickWebElement(subTabJQuerySelectDropdown);
             break;
         default:
             Assert.fail("Wrong Sub tab name is provided.");

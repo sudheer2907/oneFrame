@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.TestException;
 
-public abstract class TestFactory {
+public abstract class WebDriverFactory {
     private static WebDriver driver;
     static String path;
 
@@ -40,7 +40,6 @@ public abstract class TestFactory {
             Assert.fail("Wrong browser Name provided.");
         }
         getDriver().manage().window().maximize();
-        System.out.println(Utilities.getEnvironmentProperties("baseUrl"));
         getDriver().get(Utilities.getEnvironmentProperties("baseUrl"));
     }
 
@@ -60,7 +59,14 @@ public abstract class TestFactory {
      *            - web driver.
      */
     public static void setDriver(WebDriver driver) {
-        TestFactory.driver = driver;
+        WebDriverFactory.driver = driver;
+    }
+
+    /**
+     * Close window.
+     */
+    public static void closeWindow() {
+        getDriver().quit();
     }
 
     /**
@@ -107,7 +113,6 @@ public abstract class TestFactory {
      * @author sudheer.singh
      */
     public static void clickWebElement(WebElement element) {
-        System.out.println("Check if button is enable:" + element.isEnabled());
         if (!element.isEnabled()) {
             throw new TestException(element.getText() + " is not clickable");
         }
@@ -115,7 +120,7 @@ public abstract class TestFactory {
             highlight(element);
             element.click();
         } catch (Exception e) {
-            captureScreenShot(TestFactory.getDriver(), element.getText());
+            captureScreenShot(WebDriverFactory.getDriver(), element.getText());
         }
     }
 
@@ -136,7 +141,7 @@ public abstract class TestFactory {
             highlight(element);
             element.sendKeys(text);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 
@@ -161,5 +166,4 @@ public abstract class TestFactory {
             e.printStackTrace();
         }
     }
-
 }
