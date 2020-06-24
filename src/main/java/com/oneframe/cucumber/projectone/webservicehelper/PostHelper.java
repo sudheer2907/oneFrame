@@ -7,9 +7,9 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.oneframe.cucumber.oneframeutils.FileUtil;
-import com.oneframe.cucumber.oneframeutils.LogPrinter;
-import com.oneframe.cucumber.oneframeutils.Utilities;
+import com.oneframe.cucumber.oneframe.utils.FileUtil;
+import com.oneframe.cucumber.oneframe.utils.LogPrinter;
+import com.oneframe.cucumber.oneframe.utils.Utilities;
 import com.oneframe.cucumber.projectone.beans.ResponseBean;
 import com.oneframe.cucumber.projectone.constants.JSONConstants;
 

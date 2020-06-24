@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.oneframe.cucumber.oneframeutils.WebDriverFactory;
+import com.oneframe.cucumber.oneframe.utils.WebDriverFactory;
 
 public class SimpleFormDemoPage {
 

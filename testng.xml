@@ -4,7 +4,7 @@
 
   <test name="Cucumber-Test">
     <packages>
-      <package name="oneframe.cucumber.projectone.testrunner"/>
+      <package name="oneframe.cucumber.testrunner"/>
     </packages>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+  </test>
+</suite>

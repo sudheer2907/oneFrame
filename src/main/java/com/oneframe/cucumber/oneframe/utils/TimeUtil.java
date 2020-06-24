@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.oneframeutils;
+package com.oneframe.cucumber.oneframe.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package oneframe.cucumber.projectone.testrunner;
+package oneframe.cucumber.testrunner;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.runner.RunWith;
@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.oneframe.cucumber.oneframeutils.WebDriverFactory;
 import com.oneframe.cucumber.oneframeutils.reporting.GenerateReport;
 
 import cucumber.api.CucumberOptions;
@@ -53,6 +54,7 @@ public class TestRunner {
     @AfterClass(alwaysRun = true)
     public void tearDownClass() {
         testNGCucumberRunner.finish();
+        WebDriverFactory.getDriver().close();
         GenerateReport.generateReport("oneFrame", "target/test-report");
     }
 
