@@ -3,8 +3,6 @@ package oneframe.cucumber.projectone.stepdefinitions.ui;
 import com.oneframe.cucumber.projectone.pages.SimpleFormDemoPage;
 
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 public class TestSimpleFormDemo {
 
@@ -20,13 +18,4 @@ public class TestSimpleFormDemo {
         SimpleFormDemoPageObj.clickOnSubtab(subTabNameString);
     }
 
-    @When("^I enter text message as (.*)$")
-    public void i_enter_message_as(String textString) {
-
-    }
-
-    @Then("^I verify out is (.*)$")
-    public void i_verify_out_is(String messageText) {
-
-    }
 }

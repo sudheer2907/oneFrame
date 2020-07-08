@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.TestException;
 
@@ -165,5 +167,19 @@ public abstract class WebDriverFactory {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Wait for an element to be visible.
+     *
+     * @param element
+     *            - web element.
+     * @param timeOut
+     *            - waiting time period.
+     * @author sudheer.singh
+     */
+    public static void waitForAnElementToBeVisible(WebElement element, int timeOut) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 }
