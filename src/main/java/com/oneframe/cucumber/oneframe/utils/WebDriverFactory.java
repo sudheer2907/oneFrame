@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,15 +28,15 @@ public abstract class WebDriverFactory {
      *
      * @author sudheer.singh
      */
-    public static void launchApplication() {
+    public static void openApplication() {
         String bwoserNameString = Utilities.getEnvironmentProperties("browser");
         path = System.getProperty("user.dir");
-        switch (bwoserNameString) {
-        case "chrome":
+        switch (bwoserNameString.toUpperCase()) {
+        case "CHROME":
             System.setProperty("webdriver.chrome.driver", path + "/drivers/chromedriver.exe");
             setDriver(new ChromeDriver());
             break;
-        case "firefox":
+        case "FIREFOX":
             setDriver(new FirefoxDriver());
             break;
         default:
@@ -43,6 +44,23 @@ public abstract class WebDriverFactory {
         }
         getDriver().manage().window().maximize();
         getDriver().get(Utilities.getEnvironmentProperties("baseUrl"));
+    }
+
+    /**
+     * Wait for Page to Load.
+     *
+     * @param timeout
+     *            - page load time out.
+     * @author sudheer.singh
+     */
+    public static void waitForPageToLoad(int timeout) {
+        new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver input) {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString()
+                        .equals("complete");
+            }
+        });
     }
 
     /**
@@ -68,6 +86,7 @@ public abstract class WebDriverFactory {
      * Close window.
      */
     public static void closeWindow() {
+        getDriver().close();
         getDriver().quit();
     }
 
