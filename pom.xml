@@ -15,8 +15,6 @@
 		<checksyle.rule.file>code-compliances/checkstyle-rules.xml</checksyle.rule.file>
 		<checkstyle.failure>true</checkstyle.failure>
 		<cpd.skip>true</cpd.skip>
-		<run.ui.tests>false</run.ui.tests>
-		<browser.ui.tests>Chrome</browser.ui.tests>
 	</properties>
 	<dependencies>
 		<dependency>
