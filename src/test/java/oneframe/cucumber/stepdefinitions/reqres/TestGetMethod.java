@@ -1,4 +1,4 @@
-package oneframe.cucumber.projectone.stepdefinitions.api;
+package oneframe.cucumber.stepdefinitions.reqres;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package oneframe.cucumber.projectone.stepdefinitions.ui;
+package oneframe.cucumber.stepdefinitions.seleniumeasy;
 
 import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 import com.oneframe.cucumber.projectone.pages.SimpleFormDemoPage;

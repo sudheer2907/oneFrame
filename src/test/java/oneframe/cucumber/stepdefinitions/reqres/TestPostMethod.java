@@ -1,4 +1,4 @@
-package oneframe.cucumber.projectone.stepdefinitions.api;
+package oneframe.cucumber.stepdefinitions.reqres;
 
 import java.io.IOException;
 
