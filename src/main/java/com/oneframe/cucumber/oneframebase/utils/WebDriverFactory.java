@@ -15,12 +15,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class WebDriverFactory {
+
+    private WebDriverFactory() {
+        LogPrinter.printLog("Can not be intantiated");
+    }
+
     private static WebDriver driver;
     static String path;
 
@@ -55,12 +59,10 @@ public abstract class WebDriverFactory {
      * @author sudheer.singh
      */
     public static void waitForPageToLoad(int timeout) {
-        new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver input) {
-                return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString()
-                        .equals("complete");
-            }
+        new WebDriverWait(driver, timeout).until((WebDriver driver) -> {
+            return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString()
+                    .equals("complete");
+
         });
     }
 
@@ -135,13 +137,11 @@ public abstract class WebDriverFactory {
      *
      * @param element
      *            - web element.
-     * @throws Exception
-     *             - exception if any occured.
      * @author sudheer.singh
      */
-    public static void clickWebElement(WebElement element) throws Exception {
+    public static void clickWebElement(WebElement element) {
         if (!element.isEnabled()) {
-            throw new Exception(element.getText() + " is not clickable");
+            throw new WebDriverException(element.getText() + " is not clickable");
         }
         try {
             highlight(element);
@@ -158,19 +158,17 @@ public abstract class WebDriverFactory {
      *            - web element.
      * @param text
      *            - text to be entered into text box.
-     * @throws Exception
-     *             - exception if any occured.
      * @author sudheer.singh
      */
-    public static void sendKeys(WebElement element, String text) throws Exception {
+    public static void sendKeys(WebElement element, String text) {
         if (!element.isEnabled()) {
-            throw new Exception("WebElement " + element + " is not editabe as It is disabled");
+            throw new WebDriverException("WebElement " + element + " is not editabe as It is disabled");
         }
         try {
             highlight(element);
             element.sendKeys(text);
         } catch (Exception e) {
-            System.out.println(e);
+            LogPrinter.printLog(e);
         }
     }
 
@@ -181,20 +179,18 @@ public abstract class WebDriverFactory {
      *            - web element.
      * @param dropDownValue
      *            - drop value to be selected.
-     * @throws Exception
-     *             - exceeption if any occured.
      * @author sudheer.singh
      */
-    public static void selectElementByvalue(WebElement element, String dropDownValue) throws Exception {
+    public static void selectElementByvalue(WebElement element, String dropDownValue) {
         if (!element.isEnabled()) {
-            throw new Exception("WebElement " + element + " is not editabe as It is disabled");
+            throw new WebDriverException("WebElement " + element + " is not editabe as It is disabled");
         }
         try {
             highlight(element);
             Select sel = new Select(element);
             sel.selectByValue(dropDownValue);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogPrinter.printLog(e);
         }
     }
 

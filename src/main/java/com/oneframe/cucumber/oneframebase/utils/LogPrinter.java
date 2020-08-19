@@ -11,6 +11,10 @@ import org.slf4j.LoggerFactory;
  */
 public class LogPrinter {
 
+    private LogPrinter() {
+        printLog("Can not create object of LogPrinter class");
+    }
+
     private static Logger logger = LoggerFactory.getLogger(LogPrinter.class);
 
     static {

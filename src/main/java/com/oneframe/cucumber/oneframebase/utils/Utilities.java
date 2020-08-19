@@ -3,6 +3,11 @@ package com.oneframe.cucumber.oneframebase.utils;
 import java.util.ResourceBundle;
 
 public class Utilities {
+
+    private Utilities() {
+        LogPrinter.printLog("Can be instantiated");
+    }
+
     private static final ResourceBundle rb1;
     private static final ResourceBundle rb2;
 

@@ -1,10 +1,12 @@
 package com.oneframe.cucumber.projectone.pages;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 
 public class SimpleFormDemoPage {
@@ -49,7 +51,7 @@ public class SimpleFormDemoPage {
     @FindBy(xpath = "//button[contains(text(),'Show Message')]")
     private WebElement buttonShowMessage;
 
-    @FindBy(xpath = "//label[contains(text(),'Your Message:')]/following-sibling::span")
+    @FindBy(xpath = "//span[@id='display']")
     private WebElement labelGetShowMessageOutput;
 
     @FindBy(xpath = "//button[contains(text(),'Get Total')]")
@@ -61,10 +63,20 @@ public class SimpleFormDemoPage {
     @FindBy(xpath = "//input[@id='isAgeSelected']")
     private WebElement chkBoxClickOnThisChkBox;
 
-    @FindBy(xpath = "// input[@id='isAgeSelected']")
+    @FindBy(xpath = "//div[@id='txtAge']")
     private WebElement labelTextClickOnThisChkBox;
 
-    public void acceptAnAlert() throws Exception {
+    @FindBy(xpath = "//button[@id='buttoncheck']")
+    private WebElement btnGetValues;
+
+    @FindBy(xpath = "//p[@class='radiobutton']")
+    private WebElement labelTextGetValuesResult;
+
+    @FindBy(xpath = "//div[@class='panel-body']/preceding-sibling::"
+            + "div[text()='Radio Button Demo']/following-sibling::div")
+    private WebElement radioBtnGenderRadioButtonDemoXpath;
+
+    public void acceptAnAlert() {
         WebDriverFactory.waitForAnElementToBeVisible(acceptAnAlert, 20);
         WebDriverFactory.clickWebElement(acceptAnAlert);
     }
@@ -74,11 +86,9 @@ public class SimpleFormDemoPage {
      *
      * @param subTabString
      *            - sub tab name.
-     * @throws Exception
-     *             - exeception if any occured.
      * @author sudheer.singh
      */
-    public void clickOnSubtab(String subTabString) throws Exception {
+    public void clickOnSubtab(String subTabString) {
         switch (subTabString) {
         case "Simple Form Demo":
             WebDriverFactory.clickWebElement(subTabSimpleFormDemo);
@@ -111,19 +121,17 @@ public class SimpleFormDemoPage {
      *
      * @param arg
      *            - text to be entered into message textbox.
-     * @throws Exception
-     *             - exception if any occured.
      * @author sudheer.singh
      */
-    public void enterTextIntoEnterMessageTextBox(String arg) throws Exception {
+    public void enterTextIntoEnterMessageTextBox(String arg) {
         WebDriverFactory.sendKeys(txtBoxEnterMessage, arg);
     }
 
-    public void enterTextIntoEnterATextBox(String arg) throws Exception {
+    public void enterTextIntoEnterATextBox(String arg) {
         WebDriverFactory.sendKeys(txtBoxEnterAMessage, arg);
     }
 
-    public void enterTextIntoEnterBTextBox(String arg) throws Exception {
+    public void enterTextIntoEnterBTextBox(String arg) {
         WebDriverFactory.sendKeys(txtBoxEnterBMessage, arg);
     }
 
@@ -144,23 +152,62 @@ public class SimpleFormDemoPage {
      * @author sudheer.singh
      */
     public String getTextShowMessage() {
-        WebDriverFactory.waitForAnElementToBeVisible(labelGetShowMessageOutput, 4);
+        WebDriverFactory.waitForAnElementToBeVisible(labelGetShowMessageOutput, 10);
         return labelGetShowMessageOutput.getText();
     }
 
-    public void clickGetTotalValue() throws Exception {
+    public void clickGetTotalValue() {
         WebDriverFactory.clickWebElement(btnGetTotalOutput);
     }
 
-    public String getTotalValueText() throws Exception {
+    public String getTotalValueText() {
         return labelGetTotalOutput.getText();
     }
 
-    public void clickClickOnthIsCheckBox() throws Exception {
+    public void clickClickOnthIsCheckBox() {
         WebDriverFactory.clickWebElement(chkBoxClickOnThisChkBox);
     }
 
+    /**
+     * Get message displayed after clicking the checkbox.
+     *
+     * @return - checkbox message after selecting that.
+     * @author sudheer.singh
+     */
     public String getCheckBoxSelectedMessage() {
+        if (chkBoxClickOnThisChkBox.isSelected()) {
+            LogPrinter.printLog("Selected");
+        }
         return labelTextClickOnThisChkBox.getText();
+    }
+
+    /**
+     * Click on male/female radio button under radio button demo.
+     *
+     * @param gender
+     *            - Male or Female
+     */
+    public void selectGenderUnderRadioButtonDemo(String gender) {
+        WebDriverFactory.clickWebElement(radioBtnGenderRadioButtonDemoXpath
+                .findElement(By.xpath(".//label[contains(text(),'" + gender + "')]/input[1]")));
+    }
+
+    /**
+     * Click on male/female radio button under Group Radio button demo.
+     *
+     * @param gender
+     *            - Male or Female
+     */
+    public void selectGenderUnderGroupRadioButtonDemo(String gender) {
+        LogPrinter.printLog("To be completed " + gender);
+    }
+
+    public void clickGetValueButton() {
+        WebDriverFactory.clickWebElement(btnGetValues);
+    }
+
+    public String getResultAfterClickingGetCheckedValues() {
+        WebDriverFactory.waitForAnElementToBeVisible(labelTextGetValuesResult, 10);
+        return labelTextGetValuesResult.getText();
     }
 }

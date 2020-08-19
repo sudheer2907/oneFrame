@@ -12,6 +12,10 @@ import net.masterthought.cucumber.ReportBuilder;
 
 public class GenerateReport {
 
+    private GenerateReport() {
+        LogPrinter.printLog("Private construtor of Generate Report");
+    }
+
     /**
      * generate report post execution.
      *
@@ -47,7 +51,7 @@ public class GenerateReport {
      */
     public static void generateCucumberReport(String projectName, String reportFolderName) {
         File reportOutputDirectory = new File(reportFolderName);
-        List<String> jsonFiles = new ArrayList<String>();
+        List<String> jsonFiles = new ArrayList<>();
         jsonFiles.add(System.getProperty("user.dir") + "\\" + reportFolderName + "\\cucumber.json");
         String jenkinsBasePath = "";
         String buildNumber = "version 1";
