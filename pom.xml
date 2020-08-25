@@ -12,14 +12,10 @@
         <jre.level>1.8</jre.level>
         <jdk.level>1.8</jdk.level>
         <checksyle.rule.file>code-compliances/checkstyle-rules.xml</checksyle.rule.file>
-        <findbugs.rule.file>code-compliances/findbugs_exclude_filter.xml</findbugs.rule.file>
         <checkstyle.check.skip>false</checkstyle.check.skip>
         <cpd.skip>false</cpd.skip>
         <pmd.check.skip>false</pmd.check.skip>
         <findbugs.check.skip>false</findbugs.check.skip>
-        <pmd.failure>true</pmd.failure>
-        <findbugs.failure>false</findbugs.failure>
-        <checkstyle.failure>true</checkstyle.failure>
     </properties>
     <dependencies>
         <dependency>
@@ -231,10 +227,10 @@
                 <version>3.1.0</version>
                 <configuration>
                     <configLocation>${checksyle.rule.file}</configLocation>
-                    <failOnViolation>${checkstyle.failure}</failOnViolation>
+                    <failOnViolation>true</failOnViolation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
-                    <failsOnError>${checkstyle.failure}</failsOnError>
+                    <failsOnError>true</failsOnError>
                     <linkXRef>true</linkXRef>
                 </configuration>
                 <executions>
@@ -255,7 +251,7 @@
                     <includeTests>true</includeTests>
                     <targetJdk>${jre.level}</targetJdk>
                     <printFailingErrors>true</printFailingErrors>
-                    <failOnViolation>${pmd.failure}</failOnViolation>
+                    <failOnViolation>true</failOnViolation>
                     <linkXRef>false</linkXRef>
                 </configuration>
                 <executions>
@@ -277,7 +273,7 @@
                 <configuration>
                     <xmlOutput>true</xmlOutput>
                     <xmlOutputDirectory>target/site</xmlOutputDirectory>
-                    <failOnError>${findbugs.failure}</failOnError>
+                    <failOnError>true</failOnError>
                 </configuration>
                 <executions>
                     <execution>

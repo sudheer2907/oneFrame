@@ -9,13 +9,13 @@ import cucumber.api.java.Before;
 
 public class CucumberSceanrioHook {
 
-    @Before
-    public void beforeSceanrio(Scenario scenario) {
-        LogPrinter.printLog("Execution Started, Executing:" + scenario.getName());
-    }
+  @Before
+  public void beforeSceanrio(Scenario scenario) {
+    LogPrinter.printLog("Execution Started, Executing:" + scenario.getName());
+  }
 
-    @After
-    public void afterSceanrio(Scenario scenario) {
-        WebDriverFactory.closeWindow();
-    }
+  @After
+  public void afterSceanrio(Scenario scenario) {
+    WebDriverFactory.closeWindow();
+  }
 }
