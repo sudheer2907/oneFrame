@@ -26,7 +26,7 @@ public class HomePage {
    * @throws Exception - exception if occured any.
    * @author sudheer.singh
    */
-  public void clickonTab(String tabString) throws Exception {
+  public void clickonTab(String tabString) {
     switch (tabString) {
       case "Input Forms":
         WebDriverFactory.clickWebElement(tabInputForms);

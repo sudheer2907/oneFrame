@@ -6,12 +6,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.oneframe.cucumber.oneframebase.constants.JsonConstants;
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 import com.oneframe.cucumber.oneframebase.utils.Utilities;
 import com.oneframe.cucumber.projectone.beans.ResponseBean;
 
 import io.restassured.response.Response;
 
 public class GetHelper {
+
+  private GetHelper() {
+    LogPrinter.printLog("Can not intantiated");
+  }
+
   private static Response response = null;
   private static String errorMessage = null;
 

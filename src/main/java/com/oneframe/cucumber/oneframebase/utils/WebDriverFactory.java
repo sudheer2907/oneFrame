@@ -160,7 +160,7 @@ public abstract class WebDriverFactory {
       highlight(element);
       element.sendKeys(text);
     } catch (Exception e) {
-      LogPrinter.printLog(e);
+      LogPrinter.printLog(e.getMessage());
     }
   }
 
@@ -180,7 +180,7 @@ public abstract class WebDriverFactory {
       Select sel = new Select(element);
       sel.selectByValue(dropDownValue);
     } catch (Exception e) {
-      LogPrinter.printLog(e);
+      LogPrinter.printLog(e.getMessage());
     }
   }
 

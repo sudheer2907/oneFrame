@@ -25,8 +25,8 @@ public class LogPrinter {
    *
    * @param message - Message to print
    */
-  public static void printLog(Object message) {
-    logger.info(message.toString());
+  public static void printLog(String message) {
+    logger.info(message);
   }
 
 }

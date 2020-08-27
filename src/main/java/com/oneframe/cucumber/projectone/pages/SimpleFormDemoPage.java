@@ -139,7 +139,7 @@ public class SimpleFormDemoPage {
    * @throws Exception - exception if any occured.
    * @author sudheer.singh
    */
-  public void clickShowMessageButton() throws Exception {
+  public void clickShowMessageButton() {
     WebDriverFactory.clickWebElement(buttonShowMessage);
   }
 
