@@ -18,54 +18,56 @@ import cucumber.api.testng.TestNGCucumberRunner;
 
 @RunWith(Cucumber.class)
 
-@CucumberOptions(monochrome = true, features = "src//test//resources//features", glue = "oneframe.cucumber.stepdefinitions", plugin = {
-        "pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm", "html:target/test-report/cucumber",
-        "json:target/test-report/cucumber.json" }, tags = { "@SampleUITest" })
+@CucumberOptions(monochrome = true, features = "src//test//resources//features",
+    glue = "oneframe.cucumber.stepdefinitions",
+    plugin = {"pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm",
+        "html:target/test-report/cucumber", "json:target/test-report/cucumber.json"},
+    tags = {"@test1234"})
 public class TestRunner {
-    private TestNGCucumberRunner testNGCucumberRunner;
-    private static String scenarioName = null;
-    private TimeDurationCalculator timeDurationCalculator = new TimeDurationCalculator();
+  private TestNGCucumberRunner testNGCucumberRunner;
+  private static String scenarioName = null;
+  private TimeDurationCalculator timeDurationCalculator = new TimeDurationCalculator();
 
-    /**
-     * setUpClass.
-     */
+  /**
+   * setUpClass.
+   */
 
-    @BeforeClass(alwaysRun = true)
-    public void setUpClass() {
-        PropertyConfigurator.configure("log4j.properties");
-        System.setProperty("log4j.configurationFile", "log4j.properties");
-        testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
-        timeDurationCalculator.start();
-    }
+  @BeforeClass(alwaysRun = true)
+  public void setUpClass() {
+    PropertyConfigurator.configure("log4j.properties");
+    System.setProperty("log4j.configurationFile", "log4j.properties");
+    testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+    timeDurationCalculator.start();
+  }
 
-    @Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
-    public void feature(CucumberFeatureWrapper cucumberFeature) {
-        scenarioName = cucumberFeature.getCucumberFeature().getPath();
-        System.out.println("************** Executing scenario *********" + scenarioName);
-        testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
+  @Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
+  public void feature(CucumberFeatureWrapper cucumberFeature) {
+    scenarioName = cucumberFeature.getCucumberFeature().getPath();
+    System.out.println("************** Executing scenario *********" + scenarioName);
+    testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
 
-    }
+  }
 
-    @DataProvider
-    public Object[][] features() {
-        return testNGCucumberRunner.provideFeatures();
-    }
+  @DataProvider
+  public Object[][] features() {
+    return testNGCucumberRunner.provideFeatures();
+  }
 
-    /**
-     * Teardownclass.
-     */
-    @AfterClass(alwaysRun = true)
-    public void tearDownClass() {
-        timeDurationCalculator.stop();
-        timeDurationCalculator.calculate();
-        LogPrinter.printLog("Execution Took : " + timeDurationCalculator.getTimeElapsed());
-        testNGCucumberRunner.finish();
-        // WebDriverFactory.getDriver().close();
-        // WebDriverFactory.getDriver().quit();
-        GenerateReport.generateReport("oneFrame", "target/test-report");
-    }
+  /**
+   * Teardownclass.
+   */
+  @AfterClass(alwaysRun = true)
+  public void tearDownClass() {
+    timeDurationCalculator.stop();
+    timeDurationCalculator.calculate();
+    LogPrinter.printLog("Execution Took : " + timeDurationCalculator.getTimeElapsed());
+    testNGCucumberRunner.finish();
+    // WebDriverFactory.getDriver().close();
+    // WebDriverFactory.getDriver().quit();
+    GenerateReport.generateReport("oneFrame", "target/test-report");
+  }
 
-    public static String getScenarioName() {
-        return scenarioName;
-    }
+  public static String getScenarioName() {
+    return scenarioName;
+  }
 }

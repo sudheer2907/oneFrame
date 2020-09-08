@@ -58,11 +58,8 @@ public abstract class WebDriverFactory {
    * @author sudheer.singh
    */
   public static void waitForPageToLoad(int timeout) {
-    new WebDriverWait(driver, timeout).until((WebDriver driver) -> {
-      return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString()
-          .equals("complete");
-
-    });
+    new WebDriverWait(driver, timeout).until((WebDriver driver) -> ((JavascriptExecutor) driver)
+        .executeScript("return document.readyState").toString().equals("complete"));
   }
 
   /**

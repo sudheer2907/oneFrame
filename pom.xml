@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.oneframe</groupId>
-    <artifactId>org.oneframe.common</artifactId>
+    <artifactId>org.oneframe.cucumber</artifactId>
     <version>0.0.1</version>
-    <name>OneFrameSampleProject</name>
+    <name>OneFrame SampleProject</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,6 +16,7 @@
         <cpd.skip>false</cpd.skip>
         <pmd.check.skip>false</pmd.check.skip>
         <findbugs.check.skip>false</findbugs.check.skip>
+        <fail.on.pmd.cmd.findbugs.error>false</fail.on.pmd.cmd.findbugs.error>
     </properties>
     <dependencies>
         <dependency>
@@ -227,10 +228,10 @@
                 <version>3.1.0</version>
                 <configuration>
                     <configLocation>${checksyle.rule.file}</configLocation>
-                    <failOnViolation>true</failOnViolation>
+                    <failOnViolation>${fail.on.pmd.cmd.findbugs.error}</failOnViolation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
+                    <failsOnError>${failOnError}</failsOnError>
                     <linkXRef>true</linkXRef>
                 </configuration>
                 <executions>
@@ -251,7 +252,7 @@
                     <includeTests>true</includeTests>
                     <targetJdk>${jre.level}</targetJdk>
                     <printFailingErrors>true</printFailingErrors>
-                    <failOnViolation>true</failOnViolation>
+                    <failOnViolation>${fail.on.pmd.cmd.findbugs.error}</failOnViolation>
                     <linkXRef>false</linkXRef>
                 </configuration>
                 <executions>
@@ -273,7 +274,7 @@
                 <configuration>
                     <xmlOutput>true</xmlOutput>
                     <xmlOutputDirectory>target/site</xmlOutputDirectory>
-                    <failOnError>true</failOnError>
+                    <failOnError>${fail.on.pmd.cmd.findbugs.error}</failOnError>
                 </configuration>
                 <executions>
                     <execution>

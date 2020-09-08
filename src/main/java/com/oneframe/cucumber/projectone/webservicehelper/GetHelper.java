@@ -32,7 +32,7 @@ public class GetHelper {
     response = given().when().get(Utilities.getEnvironmentProperties("GetListOfUsers"));
     if (response.statusCode() != JsonConstants.OK_STATUS_CODE) {
       errorMessage = response.then().extract().asString();
-      throw new JSONException("Service to get access token is not working " + errorMessage);
+      throw new JSONException("Service to get list of users is not working " + errorMessage);
     }
     ResponseBean.setResponse(new JSONObject(response.asString()));
     return new JSONObject(response.asString());
