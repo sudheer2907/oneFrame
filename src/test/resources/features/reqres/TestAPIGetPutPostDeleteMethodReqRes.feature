@@ -1,7 +1,6 @@
-@sample
+@TestAPI
 Feature: This is sample feature file to test GET method
 
-@test1234
   Scenario: Test GET LIST USERS
     Given I hit the GET method to get list of users
     Then I verify the list of user details are correct

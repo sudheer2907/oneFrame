@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.junit.Assert;
 
-import com.oneframe.cucumber.oneframebase.constants.JSONConstants;
+import com.oneframe.cucumber.oneframebase.constants.JsonConstants;
 import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 import com.oneframe.cucumber.projectone.beans.ResponseBean;
 import com.oneframe.cucumber.projectone.webservicehelper.PostHelper;
@@ -22,7 +22,7 @@ public class TestPostMethod {
 
   @Then("^I verify the user is created$")
   public void i_verify_the_user_is_created() {
-    if (ResponseBean.getStatusCode() != JSONConstants.OK_STATUS_CREATED) {
+    if (ResponseBean.getStatusCode() != JsonConstants.OK_STATUS_CREATED) {
       Assert.fail("User is not created");
     }
     LogPrinter.printLog("It is verified that user has been created");

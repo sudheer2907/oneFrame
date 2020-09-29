@@ -1,4 +1,4 @@
-@SampleUITest2 @SampleUITest
+@TestUI
 Feature: This is sample UI test.
 
   Scenario: 01 Test Single Input Fields
