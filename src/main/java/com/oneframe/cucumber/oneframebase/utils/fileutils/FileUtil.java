@@ -1,6 +1,7 @@
 package com.oneframe.cucumber.oneframebase.utils.fileutils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -12,6 +13,10 @@ import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -24,6 +29,39 @@ public class FileUtil {
   private static String sourceLocation;
   private static String targetLocation;
   private static PrintWriter printWriter;
+
+  /**
+   * Read excel data by passing fileName, sheetName, row, column value.
+   *
+   * @param fileName - name of the excel file whose data you want to read.
+   * @param sheetName - sheet name of an excel sheet.
+   * @param rowValue - row value.
+   * @param columnValue - column value.
+   * @return - Cell data of type Cell
+   * @throws IOException - if in case file not found.
+   */
+  public static Cell readExcelData(String fileName, String sheetName, int rowValue, int columnValue)
+      throws IOException {
+    String path = "src/test/resources/testData/" + fileName;
+    File file = new File(path);
+    Cell cell1 = null;
+    XSSFWorkbook wb = null;
+    try {
+      FileInputStream fis = new FileInputStream(file);
+      wb = new XSSFWorkbook(fis);
+      XSSFSheet sheet = wb.getSheet(sheetName);
+      Row row = sheet.getRow(rowValue);
+      cell1 = row.getCell(columnValue);
+    } catch (IOException e) {
+      LogPrinter.printLog(e.toString());
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      wb.close();
+    }
+    return cell1;
+  }
 
   /**
    * Load files as string.

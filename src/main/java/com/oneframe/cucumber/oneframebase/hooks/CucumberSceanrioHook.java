@@ -11,7 +11,7 @@ public class CucumberSceanrioHook {
 
   @Before
   public void beforeSceanrio(Scenario scenario) {
-    LogPrinter.printLog("Execution Started, Executing:" + scenario.getName());
+    LogPrinter.printLog("Execution Started, Executing: " + scenario.getName());
   }
 
   @After
