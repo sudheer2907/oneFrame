@@ -226,6 +226,24 @@ public abstract class WebDriverFactory {
   }
 
   /**
+   * Verify if element is visible or not.
+   *
+   * @param webElement - WebElement to be identified if visible or not.
+   * @param timeOut - waiting time period.
+   * @return - true if webelement is visible else false.
+   * @author Sudheer.Singh
+   */
+  public static boolean isElementVisible(WebElement webElement, int timeOut) {
+    try {
+      WebDriverWait wait = new WebDriverWait(driver, timeOut);
+      wait.until(ExpectedConditions.visibilityOf(webElement));
+      return true;
+    } catch (org.openqa.selenium.NoSuchElementException e) {
+      return false;
+    }
+  }
+
+  /**
    * Switch to child or parent window.
    *
    * @param windowHandle - window to be switche into.
