@@ -18,6 +18,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.TestException;
 
 public abstract class WebDriverFactory {
 
@@ -81,14 +82,12 @@ public abstract class WebDriverFactory {
   }
 
   /**
-   * Close window.
+   * Close all the window.
    */
   public static void closeWindow() {
-    if (driver != null) {
-      getDriver().close();
-      getDriver().quit();
-      WebDriverFactory.driver = null;
-    }
+    getDriver().close();
+    getDriver().quit();
+    WebDriverFactory.driver = null;
   }
 
   /**
@@ -158,6 +157,21 @@ public abstract class WebDriverFactory {
       element.sendKeys(text);
     } catch (Exception e) {
       LogPrinter.printLog(e.getMessage());
+    }
+  }
+
+  /**
+   * Clear text box.
+   *
+   * @param element - {@link WebElement}
+   * @author sudheer.singh
+   */
+  public void clearTextBox(WebElement element) {
+    try {
+      element.clear();
+    } catch (Exception e) {
+      LogPrinter.printLog(
+          String.format("The following element could not be cleared: [%s]", element.getText()));
     }
   }
 
@@ -273,4 +287,40 @@ public abstract class WebDriverFactory {
   public static void closeCurrentBrowserWindow() {
     driver.close();
   }
+  
+  /**
+   * Get page title of opened window.
+   *
+   * @return - page title.
+   * @author sudheer.singh
+   */
+  public static String getPageTitle() {
+    try {
+      LogPrinter.printLog(String.format("The title of the page is: %s\\n\\n", driver.getTitle()));
+      return driver.getTitle();
+    } catch (Exception e) {
+      throw new TestException(String.format("Current page title is: %s", driver.getTitle()));
+    }
+  }
+
+  /**
+   * Get current URL of the page.
+   *
+   * @return - current url of the page.
+   */
+  public String getCurrentUrl() {
+    return driver.getCurrentUrl();
+  }
+
+  /**
+   * Get internal text of the WebElement.
+   *
+   * @param element - web element.
+   * @return - text of the element.
+   * @author sudheer.singh
+   */
+  public String getElementText(WebElement element) {
+    return element.getText();
+  }
+
 }

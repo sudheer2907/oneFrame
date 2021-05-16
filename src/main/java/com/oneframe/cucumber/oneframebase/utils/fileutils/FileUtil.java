@@ -57,8 +57,6 @@ public class FileUtil {
       e.printStackTrace();
     } catch (Exception e) {
       e.printStackTrace();
-    } finally {
-      wb.close();
     }
     return cell1;
   }
