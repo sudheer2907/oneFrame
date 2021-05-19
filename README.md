@@ -54,3 +54,7 @@ _* Note: WebDriver will be initialised as per the values passed into qaconfig.pr
 2. Google eclipse formatter https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml
 3. Google intellij Formatter https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml
 4. Google checker https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-8.16/src/main/resources/google_checks.xml
+
+**# To generate jacoco report post execution, simply execute the command** - mvn jacoco:report
+**# To check code issue into your project, simply execute the command** - mvn clean compile
+**# To run your test case, simply execute the command** - mvn clean test
